@@ -76,6 +76,10 @@ public class Enemy : MonoBehaviour
         //{
         //    StartCoroutine(fireCoroutine);
         //}
+        //if (???)
+        //{
+        //    StopCoroutine(fireCoroutine);
+        //}
     }
     IEnumerator FireBullet()
     {
@@ -101,5 +105,22 @@ public class Enemy : MonoBehaviour
     {
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // 當被子彈攻擊
+        if (other.tag == "Bullet")
+        {
+            hp = hp - 10;
+
+            if (hp < 0)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+
+
 
 }
