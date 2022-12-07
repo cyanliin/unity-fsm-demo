@@ -21,4 +21,13 @@ public class Bullet : MonoBehaviour
     {
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        // 撞到牆、玩家、敵人
+        if (other.tag == "Wall" || other.tag == "Player" || other.tag == "Enemy")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
