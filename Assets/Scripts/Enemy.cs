@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
 
     private NavMeshAgent agent;
     private IEnumerator fireCoroutine;
+    private bool isAttacking = false; // 記錄是否正在攻擊
 
     void Start()
     {
@@ -26,8 +27,6 @@ public class Enemy : MonoBehaviour
 
         // 定義開火coroutine 供後續啟動、停止
         fireCoroutine = FireBullet();
-        StartCoroutine(fireCoroutine);
-
     }
 
     void Update()
@@ -58,7 +57,7 @@ public class Enemy : MonoBehaviour
     // 狀態行為：閒置
     private void Idle()
     {
-
+        // ...
     }
 
     // 狀態行為：追逐
@@ -72,11 +71,13 @@ public class Enemy : MonoBehaviour
     {
         // 看向目標
         transform.LookAt(target);
-
-        //if (???)
-        //{
-        //    StartCoroutine(fireCoroutine);
-        //}
+        
+        // 只執行一次，開始重複射擊
+        if (!isAttacking) 
+        {
+            StartCoroutine(fireCoroutine);
+            isAttacking = true;
+        }
         //if (???)
         //{
         //    StopCoroutine(fireCoroutine);
