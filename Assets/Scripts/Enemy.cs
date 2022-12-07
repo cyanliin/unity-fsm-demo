@@ -26,7 +26,8 @@ public class Enemy : MonoBehaviour
 
         // 定義開火coroutine 供後續啟動、停止
         fireCoroutine = FireBullet();
-        
+        StartCoroutine(fireCoroutine);
+
     }
 
     void Update()
