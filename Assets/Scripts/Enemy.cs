@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public string status;
+    public EnemyStatus status; // !!!!!! <------- 
     public Transform target;
     public Transform firePoint;
     public GameObject bulletPrefab;
@@ -17,10 +17,16 @@ public class Enemy : MonoBehaviour
     private IEnumerator fireCoroutine;
     private bool isAttacking = false; // 記錄是否正在攻擊
 
+    // 行為列舉
+    public enum EnemyStatus
+    {
+        Idle, Chase, Attack, Escape, Heal
+    }
+
     void Start()
     {
         // 目前狀態
-        status = "Attack";
+        status = EnemyStatus.Idle;
 
         // 導航 AI
         agent = GetComponent<NavMeshAgent>();
@@ -31,24 +37,24 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if (status == "Idle")
+        if (status == EnemyStatus.Idle)
         {
             Idle();
         }
-        if (status == "Chase")
+        if (status == EnemyStatus.Chase)
         {
             Chase();
         }
-        if (status == "Attack")
+        if (status == EnemyStatus.Attack)
         {
             Attack();
         }
-        if (status == "Escape")
+        if (status == EnemyStatus.Escape)
         {
             Escape();
         }
 
-        if (status == "Heal")
+        if (status == EnemyStatus.Heal)
         {
             Heal();
         }
